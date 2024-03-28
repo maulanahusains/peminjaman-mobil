@@ -1,0 +1,64 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons ti ti-smart-home",
+      "slug": "home"
+    },
+    {
+      "menuHeader": "Admin",
+      "isAdmin": true
+    },
+    {
+      "name": "Kelola Data",
+      "icon": "menu-icon tf-icons ti ti-database",
+      "slug": "kelola-data",
+      "isAdmin": true,
+      "submenu": [
+        {
+          "name": "Kelola Karyawan",
+          "slug": "kelola-data.karyawan"
+        },
+        {
+          "name": "Kelola Jenis Kendaraan",
+          "slug": "kelola-data.jenis-kendaraan"
+        },
+        {
+          "name": "Kelola Kendaraan",
+          "slug": "kelola-data.kendaraan"
+        }
+      ]
+    },
+    {
+      "name": "Manajemen Akses",
+      "icon": "menu-icon tf-icons ti ti-lock-access",
+      "slug": "manajemen-akses.index",
+      "isAdmin": true
+    },
+    {
+      "menuHeader": "Pinjaman Kendaraan",
+      "isAdmin": true
+    },
+    {
+      "name": "Pinjaman Kendaraan",
+      "icon": "menu-icon tf-icons ti ti-car",
+      "slug": "peminjaman-kendaraan",
+      "isAdmin": true,
+      "submenu": [
+        {
+          "name": "Persetujuan Pinjaman",
+          "slug": "peminjaman-kendaraan.persetujuan"
+        },
+        {
+          "name": "List Pinjaman",
+          "slug": "peminjaman-kendaraan.index"
+        },
+        {
+          "name": "Rekap",
+          "slug": "peminjaman-kendaraan.recap"
+        }
+      ]
+    }
+  ]
+}
