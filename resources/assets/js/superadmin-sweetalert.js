@@ -1,7 +1,7 @@
 'use strict';
 
 $(function () {
-  $('.btn-delete').on('click', function (e) {
+  $('.btn-change-access').on('click', function (e) {
     e.preventDefault();
     let form = $(this).closest('form');
     Swal.fire({

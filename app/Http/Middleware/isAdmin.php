@@ -9,17 +9,18 @@ use Symfony\Component\HttpFoundation\Response;
 
 class isAdmin
 {
-  /**
-   * Handle an incoming request.
-   *
-   * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-   */
-  public function handle(Request $request, Closure $next): Response
-  {
-    $user = Auth::user();
-    if ($user->isAdmin == 1) {
-      return $next($request);
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
+    {
+        $user = Auth::user();
+        if ($user->isAdmin == 1) {
+            return $next($request);
+        }
+
+        return redirect()->back()->with('error', 'Anda Bukan Admin!');
     }
-    return redirect()->back()->with('error', 'Anda Bukan Admin!');
-  }
 }

@@ -18,15 +18,15 @@
       "submenu": [
         {
           "name": "Kelola Karyawan",
-          "slug": "kelola-data.karyawan"
+          "slug": "kelola-data.karyawan.index"
         },
         {
           "name": "Kelola Jenis Kendaraan",
-          "slug": "kelola-data.jenis-kendaraan"
+          "slug": "kelola-data.jenis-kendaraan.index"
         },
         {
           "name": "Kelola Kendaraan",
-          "slug": "kelola-data.kendaraan"
+          "slug": "kelola-data.kendaraan.index"
         }
       ]
     },

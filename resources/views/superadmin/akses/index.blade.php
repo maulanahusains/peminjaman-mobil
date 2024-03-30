@@ -44,7 +44,7 @@
                                         @method('PUT')
                                         @csrf
                                         <input type="hidden" name="user" value="{{ $user->id }}">
-                                        <button class="btn btn-sm btn-danger btn-delete" type="submit"><i
+                                        <button class="btn btn-sm btn-danger btn-change-access" type="submit"><i
                                                 class="ti ti-trash"></i></button>
                                     </form>
                                 </td>

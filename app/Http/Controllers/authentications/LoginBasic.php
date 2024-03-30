@@ -8,26 +8,29 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginBasic extends Controller
 {
-  public function index()
-  {
-    $pageConfigs = ['myLayout' => 'blank'];
-    return view('content.authentications.auth-login-basic', ['pageConfigs' => $pageConfigs]);
-  }
+    public function index()
+    {
+        $pageConfigs = ['myLayout' => 'blank'];
 
-  public function login(Request $request) {
-    if(Auth::attempt($request->only('username', 'password'))) {
-      return redirect()
-        ->route('home');
+        return view('content.authentications.auth-login-basic', ['pageConfigs' => $pageConfigs]);
     }
 
-    return redirect()
-      ->route('login');
-  }
-    
-  public function logout() {
-    Auth::logout();
+    public function login(Request $request)
+    {
+        if (Auth::attempt($request->only('username', 'password'))) {
+            return redirect()
+                ->route('home');
+        }
 
-    return redirect()
-      ->route('login');
-  }
+        return redirect()
+            ->route('login');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()
+            ->route('login');
+    }
 }

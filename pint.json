@@ -1,3 +1,16 @@
 {
-  "preset": "psr12",
+  "preset": "laravel",
+  "rules": {
+    "array_indentation": true,
+    "phpdoc_indent": true,
+    "statement_indentation": true,
+    "method_chaining_indentation": true,
+    "whitespace_after_comma_in_array": {
+      "ensure_single_space": true
+    },
+    "indentation_type": true
+  },
+  "indentation_style": "space",
+  "indentation_size": 2,
+  "indent": "  "
 }
