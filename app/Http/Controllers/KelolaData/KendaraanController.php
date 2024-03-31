@@ -75,7 +75,7 @@ class KendaraanController extends Controller
 
     $jenis_plat = $this->splitString($request->plat_nomor);
     $jenis_plat = substr($jenis_plat[1], -1);
-    $jenis_plat = ((int) $jenis_plat % 2 == 0) ? 'Genap' : 'Ganjil';
+    $jenis_plat = ((int) $jenis_plat % 2 == 0 || $jenis_plat == 0) ? 'Genap' : 'Ganjil';
 
     DB::beginTransaction();
     try {
@@ -94,6 +94,7 @@ class KendaraanController extends Controller
         ->route('kelola-data.kendaraan.index')
         ->with('success', 'Sukses menambahkan Data');
     } catch (\Throwable $th) {
+      dd($th);
       DB::rollBack();
       return redirect()
         ->route('kelola-data.kendaraan.index')
@@ -135,7 +136,7 @@ class KendaraanController extends Controller
 
     $jenis_plat = $this->splitString($request->plat_nomor);
     $jenis_plat = substr($jenis_plat[1], -1);
-    $jenis_plat = ((int) $jenis_plat % 2 == 0) ? 'Genap' : 'Ganjil';
+    $jenis_plat = ((int) $jenis_plat % 2 == 0 || $jenis_plat == 0) ? 'Genap' : 'Ganjil';
 
     DB::beginTransaction();
     try {
@@ -154,7 +155,6 @@ class KendaraanController extends Controller
         ->route('kelola-data.kendaraan.index')
         ->with('success', 'Sukses Mengubah Data');
     } catch (\Throwable $th) {
-      dd($th);
       DB::rollBack();
       return redirect()
         ->route('kelola-data.kendaraan.index')

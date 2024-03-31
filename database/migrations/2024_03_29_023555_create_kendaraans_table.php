@@ -20,6 +20,9 @@ return new class extends Migration
       $table->string('plat_nomor');
       $table->string('jenis_plat');
       $table->boolean('isLending')->default(0);
+
+      $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+      $table->foreign('id_jenis')->references('id')->on('jenis_kendaraan')->onDelete('cascade');
     });
   }
 

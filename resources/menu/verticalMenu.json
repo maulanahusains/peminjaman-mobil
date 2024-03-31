@@ -7,6 +7,21 @@
       "slug": "home"
     },
     {
+      "name": "Pinjaman Kendaraan",
+      "icon": "menu-icon tf-icons ti ti-car",
+      "slug": "peminjaman-kendaraan",
+      "submenu": [
+        {
+          "name": "Pengajuan Pinjaman",
+          "slug": "peminjaman-kendaraan.list-pengajuan"
+        },
+        {
+          "name": "Riwayat",
+          "slug": "peminjaman-kendaraan.riwayat"
+        }
+      ]
+    },
+    {
       "menuHeader": "Admin",
       "isAdmin": true
     },
@@ -41,22 +56,22 @@
       "isAdmin": true
     },
     {
-      "name": "Pinjaman Kendaraan",
+      "name": "Manajemen Pinjaman",
       "icon": "menu-icon tf-icons ti ti-car",
-      "slug": "peminjaman-kendaraan",
+      "slug": "superadmin.peminjaman-kendaraan",
       "isAdmin": true,
       "submenu": [
         {
           "name": "Persetujuan Pinjaman",
-          "slug": "peminjaman-kendaraan.persetujuan"
+          "slug": "superadmin.peminjaman-kendaraan.persetujuan"
         },
         {
           "name": "List Pinjaman",
-          "slug": "peminjaman-kendaraan.index"
+          "slug": "superadmin.peminjaman-kendaraan.index"
         },
         {
           "name": "Rekap",
-          "slug": "peminjaman-kendaraan.recap"
+          "slug": "superadmin.peminjaman-kendaraan.recap"
         }
       ]
     }

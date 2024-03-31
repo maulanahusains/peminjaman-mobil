@@ -12,6 +12,7 @@
     flatpickrDateTime = document.querySelector('#flatpickr-datetime'),
     flatpickrMulti = document.querySelector('#flatpickr-multi'),
     flatpickrRange = document.querySelector('#flatpickr-range'),
+    flatpickrRangeToday = document.querySelector('#flatpickr-today'),
     flatpickrInline = document.querySelector('#flatpickr-inline'),
     flatpickrFriendly = document.querySelector('#flatpickr-human-friendly'),
     flatpickrDisabledRange = document.querySelector('#flatpickr-disabled-range');
@@ -45,6 +46,14 @@
       weekNumbers: true,
       enableTime: true,
       mode: 'multiple',
+      minDate: 'today'
+    });
+  }
+
+  // Range Disable today
+  if (typeof flatpickrRangeToday != undefined) {
+    flatpickrRangeToday.flatpickr({
+      mode: 'range',
       minDate: 'today'
     });
   }

@@ -70,7 +70,6 @@ class JenisKendaraanController extends Controller
         ->route('kelola-data.jenis-kendaraan.index')
         ->with('success', 'Sukses Menambahkan Data');
     } catch (\Throwable $th) {
-      dd($th);
       DB::rollBack();
 
       return redirect()
