@@ -20,6 +20,7 @@ return new class extends Migration
       $table->date('tanggal_kembali');
       $table->text('agenda');
       $table->string('status');
+      $table->string('alasan_ditolak')->nullable();
       $table->timestamps();
 
       $table->foreign('id_kendaraan')->references('id')->on('kendaraans')->onDelete('cascade');

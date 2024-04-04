@@ -9,11 +9,13 @@ use App\Http\Controllers\KelolaData\KaryawanController as KelolaKaryawan;
 use App\Http\Controllers\KelolaData\KendaraanController as KelolaKendaraan;
 
 use App\Http\Controllers\PinjamanKendaraan as UserPinjaman;
+use App\Http\Controllers\Admin\PinjamanKendaraan as AdminPinjaman;
 
 use App\Http\Controllers\language\LanguageController;
 use App\Http\Controllers\pages\HomePage;
 use App\Http\Controllers\pages\MiscError;
 use App\Http\Controllers\pages\Page2;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::any('session-message', function (Request $request) {
+  return redirect()->back()->with($request->query('type'), $request->query('message'));
+})->name('session-message');
 
 Route::middleware('auth')->group(function () {
   Route::get('/', [HomePage::class, 'index'])->name('home');
@@ -46,6 +52,20 @@ Route::prefix('superadmin')->middleware(['auth', 'isAdmin'])->group(function () 
   Route::prefix('manajemen-akses')->controller(AksesUser::class)->group(function () {
     Route::get('/', 'index')->name('manajemen-akses.index');
     Route::put('/', 'manipulate_admin')->name('manajemen-akses.manipulate_admin');
+  });
+
+  Route::prefix('peminjaman-uang')->controller(AdminPinjaman::class)->group(function () {
+    Route::get('/list-persetujuan', 'list_persetujuan')->name('superadmin.peminjaman-kendaraan.list-persetujuan');
+    Route::get('/list-persetujuan/datatable', 'datatable_persetujuan')->name('superadmin.peminjaman-kendaraan.datatable-persetujuan');
+    Route::get('/list-persetujuan/{id}', 'detail_persetujuan')->name('superadmin.peminjaman-kendaraan.detail-persetujuan');
+    Route::put('/list-persetujuan/setuju/{id}', 'setuju')->name('superadmin.peminjaman-kendaraan.setuju');
+    Route::put('/list-persetujuan/tolak/{id}', 'tolak')->name('superadmin.peminjaman-kendaraan.tolak');
+
+    Route::get('/list-berjalan', 'list_berjalan')->name('superadmin.peminjaman-kendaraan.list-berjalan');
+    Route::get('/list-persetujuan/datatable', 'datatable_berjalan')->name('superadmin.peminjaman-kendaraan.datatable-berjalan');
+    Route::get('/list-berjalan/{id}', 'detail_berjalan')->name('superadmin.peminjaman-kendaraan.detail-berjalan');
+    Route::put('/list-berjalan/selesai/{id}', 'selesai')->name('superadmin.peminjaman-kendaraan.selesai');
+    Route::get('/recap', 'recap')->name('superadmin.peminjaman-kendaraan.recap');
   });
 
   Route::prefix('kelola_data')->name('kelola-data.')->group(function () {

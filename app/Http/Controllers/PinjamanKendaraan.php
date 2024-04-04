@@ -116,15 +116,18 @@ class PinjamanKendaraan extends Controller
 
     DB::beginTransaction();
     try {
-      $pinjaman = new Peminjaman;
-      $pinjaman->id_kendaraan = $kendaraan->id;
-      $pinjaman->penanggung_jawab = $request->penanggung_jawab;
-      $pinjaman->tanggal_pinjam = $tanggalMulai;
-      $pinjaman->tanggal_kembali = $tanggalKembali;
-      $pinjaman->kebutuhan = $request->kebutuhan;
-      $pinjaman->agenda = $request->agenda;
-      $pinjaman->status = 'Diajukan';
-      $pinjaman->save();
+      $kendaraan->isLending = 1;
+      if ($kendaraan->save()) {
+        $pinjaman = new Peminjaman;
+        $pinjaman->id_kendaraan = $kendaraan->id;
+        $pinjaman->penanggung_jawab = $request->penanggung_jawab;
+        $pinjaman->tanggal_pinjam = $tanggalMulai;
+        $pinjaman->tanggal_kembali = $tanggalKembali;
+        $pinjaman->kebutuhan = $request->kebutuhan;
+        $pinjaman->agenda = $request->agenda;
+        $pinjaman->status = 'Diajukan';
+        $pinjaman->save();
+      }
 
       DB::commit();
       return redirect()

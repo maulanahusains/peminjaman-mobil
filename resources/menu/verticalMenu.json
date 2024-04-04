@@ -63,11 +63,11 @@
       "submenu": [
         {
           "name": "Persetujuan Pinjaman",
-          "slug": "superadmin.peminjaman-kendaraan.persetujuan"
+          "slug": "superadmin.peminjaman-kendaraan.list-persetujuan"
         },
         {
           "name": "List Pinjaman",
-          "slug": "superadmin.peminjaman-kendaraan.index"
+          "slug": "superadmin.peminjaman-kendaraan.list-berjalan"
         },
         {
           "name": "Rekap",

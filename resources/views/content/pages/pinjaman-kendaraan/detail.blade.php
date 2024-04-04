@@ -40,6 +40,15 @@
     </div>
   </div>
 
+  @if ($peminjaman->alasan_ditolak)
+    <div class="row">
+      <div class="col mb-2">
+        <label for="nameBasic" class="form-label">Alasan Ditolak</label>
+        <input type="text" class="form-control" value="{{ $peminjaman->alasan_ditolak }}" readonly>
+      </div>
+    </div>
+  @endif
+
   <div class="row">
     <div class="col-sm">
       <small class="text-light fw-medium">Jenis Plat</small>

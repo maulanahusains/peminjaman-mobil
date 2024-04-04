@@ -131,8 +131,7 @@
                 <small class="text-light fw-medium">Jenis Plat</small>
                 <div class="d-flex mt-2 gap-4">
                   <div class="form-check">
-                    <input class="form-check-input" name="jenis_plat" type="radio" value="Ganjil" id="defaultRadio1"
-                      checked />
+                    <input class="form-check-input" name="jenis_plat" type="radio" value="Ganjil" id="defaultRadio1" />
                     <label class="form-check-label" for="defaultRadio1">
                       Ganjil
                     </label>
@@ -145,7 +144,7 @@
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" name="jenis_plat" type="radio" value="Apapun"
-                      id="defaultRadio3" />
+                      id="defaultRadio3" checked />
                     <label class="form-check-label" for="defaultRadio3">
                       Apapun
                     </label>
