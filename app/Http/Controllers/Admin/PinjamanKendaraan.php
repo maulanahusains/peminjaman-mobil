@@ -8,6 +8,7 @@ use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class PinjamanKendaraan extends Controller
 {
@@ -134,5 +135,29 @@ class PinjamanKendaraan extends Controller
           'Message' => 'error'
         ], 500);
     }
+  }
+
+  public function recap()
+  {
+    return view('superadmin.peminjaman-kendaraan.recap');
+  }
+
+  public function datatable_recap()
+  {
+    $peminjaman = Peminjaman::with('PenanggungJawab', 'Kendaraan')
+      ->whereIn('status', ['Selesai', 'Ditolak'])
+      ->get();
+
+    return DataTables::of($peminjaman)
+      ->addIndexColumn()
+      ->toJson();
+  }
+
+  public function pdf_recap()
+  {
+    $peminjaman = Peminjaman::whereIn('status', ['Selesai', 'Ditolak'])->get();
+    $pdf = PDF::loadView('superadmin.peminjaman-kendaraan.recapPDF', compact('peminjaman'));
+    // return view('superadmin.peminjaman-kendaraan.recapPDF', compact('peminjaman'));
+    return $pdf->download('rekap-peminjaman.pdf');
   }
 }

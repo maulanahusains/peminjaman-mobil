@@ -66,6 +66,8 @@ Route::prefix('superadmin')->middleware(['auth', 'isAdmin'])->group(function () 
     Route::get('/list-berjalan/{id}', 'detail_berjalan')->name('superadmin.peminjaman-kendaraan.detail-berjalan');
     Route::put('/list-berjalan/selesai/{id}', 'selesai')->name('superadmin.peminjaman-kendaraan.selesai');
     Route::get('/recap', 'recap')->name('superadmin.peminjaman-kendaraan.recap');
+    Route::get('/recap/datatable', 'datatable_recap')->name('superadmin.peminjaman-kendaraan.datatable-recap');
+    Route::get('/recap/pdf', 'pdf_recap')->name('superadmin.peminjaman-kendaraan.pdf-recap');
   });
 
   Route::prefix('kelola_data')->name('kelola-data.')->group(function () {
