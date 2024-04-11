@@ -62,7 +62,7 @@ Route::prefix('superadmin')->middleware(['auth', 'isAdmin'])->group(function () 
     Route::put('/list-persetujuan/tolak/{id}', 'tolak')->name('superadmin.peminjaman-kendaraan.tolak');
 
     Route::get('/list-berjalan', 'list_berjalan')->name('superadmin.peminjaman-kendaraan.list-berjalan');
-    Route::get('/list-persetujuan/datatable', 'datatable_berjalan')->name('superadmin.peminjaman-kendaraan.datatable-berjalan');
+    Route::get('/list-berjalan/datatable', 'datatable_berjalan')->name('superadmin.peminjaman-kendaraan.datatable-berjalan');
     Route::get('/list-berjalan/{id}', 'detail_berjalan')->name('superadmin.peminjaman-kendaraan.detail-berjalan');
     Route::put('/list-berjalan/selesai/{id}', 'selesai')->name('superadmin.peminjaman-kendaraan.selesai');
     Route::get('/recap', 'recap')->name('superadmin.peminjaman-kendaraan.recap');
