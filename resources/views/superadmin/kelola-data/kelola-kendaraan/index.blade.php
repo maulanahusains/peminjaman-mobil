@@ -59,7 +59,8 @@
                 <select name="jenis" class="form-control select2">
                   <option value=""></option>
                   @foreach ($jenis as $item)
-                    <option value="{{ $item->id }}">{{ $item->nama_jenis }}</option>
+                    <option value="{{ $item->id }}" {{ old('jenis') == $item->id ? 'selected' : '' }}>
+                      {{ $item->nama_jenis }}</option>
                   @endforeach
                 </select>
                 @error('jenis')
@@ -72,7 +73,8 @@
                 <select name="pemilik" class="form-control select2">
                   <option value=""></option>
                   @foreach ($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->username }}</option>
+                    <option value="{{ $user->id }}" {{ old('pemilik') == $user->id ? 'selected' : '' }}>
+                      {{ $user->username }}</option>
                   @endforeach
                 </select>
                 @error('pemilik')
@@ -82,7 +84,8 @@
 
               <div class="col mb-2">
                 <label for="nameBasic" class="form-label">Nama</label>
-                <input type="text" name="nama" class="form-control" placeholder="Nama Kendaraan">
+                <input type="text" name="nama" class="form-control" placeholder="Nama Kendaraan"
+                  value="{{ old('nama') }}">
                 @error('nama')
                   <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -90,7 +93,8 @@
 
               <div class="col mb-2">
                 <label for="nameBasic" class="form-label">Tipe</label>
-                <input type="text" name="tipe" class="form-control" placeholder="Tipe Kendaraan">
+                <input type="text" name="tipe" class="form-control" placeholder="Tipe Kendaraan"
+                  value="{{ old('tipe') }}">
                 @error('tipe')
                   <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -98,7 +102,8 @@
 
               <div class="col mb-2">
                 <label for="nameBasic" class="form-label">Plat Nomor</label>
-                <input type="text" name="plat_nomor" class="form-control" placeholder="Plat Nomor Kendaraan">
+                <input type="text" name="plat_nomor" class="form-control" placeholder="ex: D2738ADK"
+                  value="{{ old('plat_nomor') }}">
                 @error('plat_nomor')
                   <span class="text-danger">{{ $message }}</span>
                 @enderror

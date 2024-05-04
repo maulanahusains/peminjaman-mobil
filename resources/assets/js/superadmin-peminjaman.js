@@ -39,7 +39,8 @@ $(function () {
             method: 'GET',
             type: 'JSON',
             success: function (res) {
-              $('.response').replaceWith(res);
+              $('.response').empty();
+              $('.response').html(res);
               $('.modal-detail').modal('show');
             }
           });
@@ -99,7 +100,8 @@ $(function () {
             url: route,
             method: 'GET',
             success: function (res) {
-              $('.response').replaceWith(res);
+              $('.response').empty();
+              $('.response').html(res);
               $('.modal-detail').modal('show');
             }
           });

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\DataTables;
 
@@ -53,13 +54,21 @@ class KaryawanController extends Controller
    */
   public function store(Request $request)
   {
-    $request->validate([
+    $validator = Validator::make($request->all(), [
       'name' => ['required'],
-      'username' => ['required', 'unique:users,username'],
+      'username' => ['required', 'min:6', 'unique:users,username'],
       'nik' => ['required'],
       'email' => ['required', 'email'],
-      'password' => ['required', 'min:8']
+      'password' => ['required', 'min:6']
     ]);
+
+    if ($validator->fails()) {
+      return redirect()
+        ->back()
+        ->withErrors($validator)
+        ->withInput()
+        ->with('error', 'Gagal Memasukan Data! Silahkan Masukan Kembali');
+    }
 
     DB::beginTransaction();
     try {
@@ -106,12 +115,34 @@ class KaryawanController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    $request->validate([
+    $validator = Validator::make($request->all(), [
       'name' => ['required'],
-      'username' => ['required', Rule::unique('users', 'username')->ignore($id),],
+      'username' => ['required', Rule::unique('users', 'username')->ignore($id), 'min:6'],
       'nik' => ['required'],
       'email' => ['required', 'email'],
+      'password' => ['nullable', 'min:6', function ($attribute, $value, $fail) use ($request) {
+        if (!empty($request->input('password'))) {
+          if (strlen($value) < 6) {
+            $fail('The ' . $attribute . ' must be at least 6 characters.');
+          }
+        }
+      }]
     ]);
+
+    if ($validator->fails()) {
+      $errorMessages = collect($validator->errors()->all());
+      $errorMessage = 'Gagal Mengubah Data! Silahkan Masukkan Kembali';
+
+      if ($errorMessages->isNotEmpty()) {
+        $errorMessage .= '<br><br>' . implode('<br>', $errorMessages->toArray());
+      }
+
+      return redirect()
+        ->back()
+        ->withErrors($validator)
+        ->withInput()
+        ->with('error', $errorMessage);
+    }
 
     $karyawan = User::where('id', $id)->first();
     $password = ($request->password) ? bcrypt($request->password) : $karyawan->password;

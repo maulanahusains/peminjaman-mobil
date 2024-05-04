@@ -93,8 +93,9 @@ class PinjamanKendaraan extends Controller
   public function datatable_berjalan()
   {
     $peminjaman = Peminjaman::with('Kendaraan', 'PenanggungJawab')
-      ->where('status', 'Diajukan')
+      ->where('status', 'Berjalan')
       ->get();
+
     return DataTables::of($peminjaman)
       ->addIndexColumn()
       ->addColumn('detail', function ($row) {

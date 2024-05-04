@@ -25,7 +25,7 @@
         @csrf
         <div class="col mb-2">
           <label for="nameBasic" class="form-label">Jenis Kendaraan</label>
-          <input type="text" name="jenis" class="form-control">
+          <input type="text" name="jenis" class="form-control" value="{{ old('jenis') }}">
           @error('jenis')
             <span class="text-danger">{{ $message }}</span>
           @enderror

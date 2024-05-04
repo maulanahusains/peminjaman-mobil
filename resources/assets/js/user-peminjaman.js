@@ -177,7 +177,8 @@ $(function () {
             method: 'GET',
             type: 'JSON',
             success: function (res) {
-              $('.response').replaceWith(res);
+              $('.response').empty();
+              $('.response').html(res);
               $('.modal-detail').modal('show');
             }
           });
@@ -215,7 +216,6 @@ $(function () {
         {
           name: 'Aksi',
           render: function (data, type, row) {
-            console.log(row);
             return `<div class="d-flex align-items-center gap-2">
             ${row.detail}
             </div>`;

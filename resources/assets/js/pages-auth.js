@@ -5,6 +5,18 @@
 'use strict';
 const formAuthentication = document.querySelector('#formAuthentication');
 
+function swal_error(err) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: err,
+    customClass: {
+      confirmButton: 'btn btn-primary waves-effect waves-light'
+    },
+    buttonsStyling: false
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function (e) {
   (function () {
     // Form validation for Add new record

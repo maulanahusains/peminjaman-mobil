@@ -8,6 +8,7 @@ use App\Models\Kendaraan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
 class KendaraanController extends Controller
@@ -65,13 +66,21 @@ class KendaraanController extends Controller
    */
   public function store(Request $request)
   {
-    $request->validate([
+    $validator = Validator::make($request->all(), [
       'jenis' => ['required'],
       'pemilik' => ['required'],
       'nama' => ['required', 'max:255'],
       'tipe' => ['required'],
-      'plat_nomor' => ['required']
+      'plat_nomor' => ['required', 'regex:/^[a-zA-Z]{1,4}\d{1,4}[a-zA-Z]{1,4}$/']
     ]);
+
+    if ($validator->fails()) {
+      return redirect()
+        ->back()
+        ->withErrors($validator)
+        ->withInput()
+        ->with('error', 'Gagal Menambahkan Data! Silahkan Masukan Kembali');
+    }
 
     $jenis_plat = $this->splitString($request->plat_nomor);
     $jenis_plat = substr($jenis_plat[1], -1);
@@ -126,13 +135,28 @@ class KendaraanController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    $request->validate([
+    $validator = Validator::make($request->all(), [
       'jenis' => ['required'],
       'pemilik' => ['required'],
       'nama' => ['required', 'max:255'],
       'tipe' => ['required'],
-      'plat_nomor' => ['required']
+      'plat_nomor' => ['required', 'regex:/^[a-zA-Z]{1,4}\d{1,4}[a-zA-Z]{1,4}$/']
     ]);
+
+    if ($validator->fails()) {
+      $errorMessages = collect($validator->errors()->all());
+      $errorMessage = 'Gagal Mengubah Data! Silahkan Masukkan Kembali';
+
+      if ($errorMessages->isNotEmpty()) {
+        $errorMessage .= '<br><br>' . implode('<br>', $errorMessages->toArray());
+      }
+
+      return redirect()
+        ->back()
+        ->withErrors($validator)
+        ->withInput()
+        ->with('error', $errorMessage);
+    }
 
     $jenis_plat = $this->splitString($request->plat_nomor);
     $jenis_plat = substr($jenis_plat[1], -1);

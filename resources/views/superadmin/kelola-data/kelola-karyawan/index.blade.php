@@ -55,7 +55,8 @@
               @csrf
               <div class="col mb-2">
                 <label for="nameBasic" class="form-label">Nama</label>
-                <input type="text" name="name" class="form-control" placeholder="Nama Karyawan">
+                <input type="text" name="name" class="form-control" placeholder="Nama Karyawan"
+                  value="{{ old('name') }}">
                 @error('name')
                   <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -64,7 +65,7 @@
               <div class="col mb-2">
                 <label for="nameBasic" class="form-label">Nik</label>
                 <input type="text" oninput="this.value = this.value.replace(/\D/g, '')" name="nik"
-                  class="form-control" placeholder="Nik Karyawan">
+                  class="form-control" placeholder="Nik Karyawan" value="{{ old('nik') }}">
                 @error('nik')
                   <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -72,7 +73,8 @@
 
               <div class="col mb-2">
                 <label for="nameBasic" class="form-label">Username</label>
-                <input type="text" name="username" class="form-control" placeholder="Username Karyawan">
+                <input type="text" name="username" class="form-control" placeholder="Username Karyawan"
+                  value="{{ old('username') }}">
                 @error('username')
                   <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -80,7 +82,8 @@
 
               <div class="col mb-2">
                 <label for="nameBasic" class="form-label">Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Email Karyawan">
+                <input type="email" name="email" class="form-control" placeholder="Email Karyawan"
+                  value="{{ old('email') }}">
                 @error('email')
                   <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -88,7 +91,8 @@
 
               <div class="col mb-2">
                 <label for="nameBasic" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Password karyawan">
+                <input type="password" name="password" class="form-control" placeholder="Password karyawan"
+                  value="{{ old('password') }}">
                 @error('password')
                   <span class="text-danger">{{ $message }}</span>
                 @enderror

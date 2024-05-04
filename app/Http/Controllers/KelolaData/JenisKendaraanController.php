@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JenisKendaraan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\DataTables;
 
@@ -54,9 +55,17 @@ class JenisKendaraanController extends Controller
    */
   public function store(Request $request)
   {
-    $request->validate([
+    $validator = Validator::make($request->all(), [
       'jenis' => 'required|unique:jenis_kendaraan,nama_jenis',
     ]);
+
+    if ($validator->fails()) {
+      return redirect()
+        ->back()
+        ->withErrors($validator)
+        ->withInput()
+        ->with('error', 'Gagal Memasukan Data! Silahkan Masukan Kembali');
+    }
 
     DB::beginTransaction();
     try {
@@ -101,12 +110,27 @@ class JenisKendaraanController extends Controller
   public function update(Request $request, string $id)
   {
     $jenis = JenisKendaraan::where('id', $id)->first();
-    $request->validate([
+    $validator = Validator::make($request->all(), [
       'jenis' => [
         'required',
         Rule::unique('jenis_kendaraan', 'nama_jenis')->ignore($id),
       ],
     ]);
+
+    if ($validator->fails()) {
+      $errorMessages = collect($validator->errors()->all());
+      $errorMessage = 'Gagal Mengubah Data! Silahkan Masukkan Kembali';
+
+      if ($errorMessages->isNotEmpty()) {
+        $errorMessage .= '<br><br>' . implode('<br>', $errorMessages->toArray());
+      }
+
+      return redirect()
+        ->back()
+        ->withErrors($validator)
+        ->withInput()
+        ->with('error', $errorMessage);
+    }
 
     DB::beginTransaction();
     try {

@@ -7,6 +7,7 @@ use App\Models\Kendaraan;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
 class PinjamanKendaraan extends Controller
@@ -86,13 +87,21 @@ class PinjamanKendaraan extends Controller
 
   public function store(Request $request)
   {
-    $request->validate([
+    $validator = Validator::make($request->all(), [
       'penanggung_jawab' => ['required'],
       'kebutuhan' => ['required'],
       'tanggal' => ['required'],
       'agenda' => ['required'],
       'jenis_plat' => ['required']
     ]);
+
+    if ($validator->fails()) {
+      return redirect()
+        ->back()
+        ->withErrors($validator)
+        ->withInput()
+        ->with('error', 'Gagal Mengajukan Pinjaman, Silahkan input ulang');
+    }
 
     $kendaraan = Kendaraan::where('isLending', 0)
       ->when($request->jenis != 'Apapun', function ($q) use ($request) {
